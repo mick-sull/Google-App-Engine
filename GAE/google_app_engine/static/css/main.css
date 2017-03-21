@@ -1,0 +1,18 @@
+body {
+ font-family: Verdana, Helvetica, sans-serif;
+ background-color: #e6f2ff;
+}
+table {
+    border: 1px solid black;
+    text-align: left;
+}
+th {
+    background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #0080ff;
+}
+tr:nth-child(odd) {
+    background-color: #80bfff;
+}

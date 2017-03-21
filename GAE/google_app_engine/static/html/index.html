@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DROPBOX MOS</title>
+    <link type="text/css" rel="stylesheet" href="static/css/main.css" rel="stylesheet">
+</head>
+<body>
+<!--Login details-->
+{% if user %}
+ {{ user.nickname }}!
+ [<a href="{{ logout_url }}"><b>sign out</b></a>]
+{% else %}
+ Anon!
+ [<a href="{{ logout_url }}"><b>sign in</b></a>]
+{% endif %}
+
+<!--Form to upload a file-->
+  <h2>Upload a file to Dropbox_MOS</h2>
+  <form method="POST" action="{{form_url}}" enctype="multipart/form-data">
+    <input type="file" name="file" /><br />
+    <input type="submit" value="Upload" />
+  </form>
+<h2>All files</h2>
+<form method="POST" action="{{download_url}}">
+    <table style="width:75%">
+      <tr>
+        <th></th>
+        <th>File Name</th>
+        <th>Uploader</th>
+        <th>Date</th>
+        <th>Download</th>
+      </tr>
+        {% for file in files_info %}
+            <tr>
+                <td><input type="checkbox" name="fileChecked" value ={{ file.key.id }}></td>
+                <td><small><i>{{file.blob.filename}}</i></small></td>
+                <td><small><i>{{ file.uploaded_by}}</i></small></td>
+                <td><small><i>{{file.uploaded_at.ctime}}</i></small></input></td>
+                <td><a href="/file/{{file.key.id}}/download">Download this file</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p></p><input type="submit" value="Download" />
+  </form>
+
+</body>
+</html>
